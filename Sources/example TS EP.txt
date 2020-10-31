@@ -1,0 +1,25 @@
+-- Possible Episode Matches --
+ep23
+Ep23
+EP23
+23
+
+-- Possible Timestamp Matches --
+2222
+12 34
+12:12.34
+d2 36
+d123
+23d2
+1247.89
+-- Regex for Timestamps --
+(?P<Min>^\d\d?)[:| ]?(?P<Sec>\d\d)(.(?P<Mil>\d\d?))?
+
+-- Cleaned Timestamps --
+00:11:40.000
+
+-- Regex for Episodes --
+((ep|Ep|EP)(\d\d?))?(^\d\d?$)?([D|d]\w[\s|:](\d\d?))?
+
+-- cleaned Episode --
+Ep_22
