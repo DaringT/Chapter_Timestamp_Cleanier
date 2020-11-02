@@ -134,65 +134,54 @@ Parameters:
         else:
             return None, None
 
-        # def make_xml(ts_list, file=None)
-    def make_xml(self, output_file=None, TS_Language="eng"):
+    def make_xml(self, output_file=None, language="eng"):
         """Turns a List into a XML Chapter File
                 Paramiters:
                         output_file=None:
-                                outputs the XML File if used alone you input CC(ts_list=input_list_here)
-                        TS_Language="eng"
-                                TS_Language gets inputed in the xml Chapter File
+                                outputs the TXT File if used alone you input CC(ts_list=input_list_here)
         """
-        Head_L1 = ("<?xml version=\"1.0\"?>")
-        Head_L2 = ("<!-- <!DOCTYPE Chapters SYSTEM \"matroskachapters.dtd\"> -->")
-        Head_L3 = ("<Chapters>")
-        Head_L4 = ("<EditionEntry>")
-        Head = f"{Head_L1}\n{Head_L2}\n{Head_L3}\n  {Head_L4}"
-        Body = '''	<ChapterAtom>
-	  <ChapterTimeStart>%s</ChapterTimeStart>
-	  <ChapterTimeEnd>%s</ChapterTimeEnd>
-	  <ChapterDisplay>
-		<ChapterString>%s</ChapterString>
-		<ChapterLanguage>%s</ChapterLanguage>
-	  </ChapterDisplay>
-	</ChapterAtom>'''
-        Closing_Body = '''	<ChapterAtom>
-	  <ChapterTimeStart>%s</ChapterTimeStart>
-	  <ChapterDisplay>
-		<ChapterString>%s</ChapterString>
-		<ChapterLanguage>%s</ChapterLanguage>
-	  </ChapterDisplay>
-	</ChapterAtom>'''
-        End = '''  </EditionEntry>
-</Chapters>
-		'''
+        from xml.dom import minidom
 
         if output_file == None or False:
-            print("Xml is not writing to FILE!\n\n\n")
+            print("WARNING! make_xml is not outputing to file.")
 
-        print(Head, file=output_file)
-        Chapter_number = 0
-        b_num = -1
+        root = minidom.Document()
+        Chapters = root.createElement('Chapters')
+        root.appendChild(Chapters)
 
-        for line in self.ts_list:
-            Chapter_number += 1
-            Chapter_number = str(Chapter_number)
-            TS_Chapter = "Chapter_" + Chapter_number.zfill(2)
-            Chapter_number = int(Chapter_number)
+        EditionEntry = root.createElement("EditionEntry")
+        Chapters.appendChild(EditionEntry)
 
-            b_num += 1
+        for index, ts in enumerate(self.ts_list):
+            ChapterAtom = root.createElement("ChapterAtom")
+            EditionEntry.appendChild(ChapterAtom)
+
+            ChapterTimeStart = root.createElement("ChapterTimeStart")
+            ChapterTimeStart.appendChild(root.createTextNode(ts))
+            ChapterAtom.appendChild(ChapterTimeStart)
+
             try:
-                Formarted_Body = Body % (
-                    self.ts_list[b_num], self.ts_list[b_num + 1], TS_Chapter, TS_Language)
+                ChapterTimeEnd = root.createElement("ChapterTimeEnd")
+                ChapterTimeEnd.appendChild(
+                    root.createTextNode(self.ts_list[index + 1]))
+                ChapterAtom.appendChild(ChapterTimeEnd)
             except IndexError:
-                if b_num + 1 == len(self.ts_list):
-                    Formarted_Body = Closing_Body % (
-                        self.ts_list[-1], TS_Chapter, TS_Language)
-                    print(Formarted_Body, file=output_file)
-                break
+                pass
 
-            print(Formarted_Body, file=output_file)
-        print(End, file=output_file)
+            ChapterDisplay = root.createElement("ChapterDisplay")
+            ChapterAtom.appendChild(ChapterDisplay)
+
+            ChapterString = root.createElement("ChapterString")
+            ChapterString.appendChild(
+                root.createTextNode(f"Chapter {index + 1:02}"))
+            ChapterDisplay.appendChild(ChapterString)
+
+            ChapterLanguage = root.createElement("ChapterLanguage")
+            ChapterLanguage.appendChild(root.createTextNode(language))
+            ChapterDisplay.appendChild(ChapterLanguage)
+
+        xml_str = root.toprettyxml(indent="  ")
+        print(xml_str, file=output_file)
 
     def make_txt(self, output_file=None):
         """Turns a List into a XML Chapter File
@@ -275,9 +264,9 @@ Parameters:
         if os.path.exists(output_folderpath):
             print('WARNING!: this output folder: ',
                   output_folderpath, 'already Exist\n')
-            raise FileExistsError
-
-        os.mkdir(output_folderpath)
+		raise FileExistsError
+	else:
+		os.mkdir(output_folderpath)
 
         print(striped_file)
         print(output_folderpath)
