@@ -36,7 +36,7 @@ Parameters:
 
     def __init__(self, input_file, ts_list=None, chapter_file_type="txt"):
         self.input_file = input_file
-        if os.path.exists(self.input_file) is False:
+		if input_file != None and os.path.exists(input_file) is False:
             raise FileNotFoundError
         self.ts_list = ts_list
         # xml and txt
