@@ -25,14 +25,15 @@ Output
     .
 
 Both formats where basied for MKVToolNix 
-  This is the Text Chapter File in txt format.
-  https://github.com/DaringT/Chapter_Timestamp_Cleanier/blob/main/Sources/TXT_OUTPUT.txt
+  TXT Format
+    https://github.com/DaringT/Chapter_Timestamp_Cleanier/blob/main/Sources/TXT_OUTPUT.txt
 
-  This is the Text Chapter File in txt format.
-  https://github.com/DaringT/Chapter_Timestamp_Cleanier/blob/main/Sources/XML_OUTPUT.xml
+  XML Format
+    https://github.com/DaringT/Chapter_Timestamp_Cleanier/blob/main/Sources/XML_OUTPUT.xml
 
 #Code Examples:
   f1 = CC(input_file=f, chapter_file_type="txt")
+  # f1 = CC(input_file=f, chapter_file_type="xml", language="eng")
   f1.Create_output_files(output_file=os.getcwd())
   
   
