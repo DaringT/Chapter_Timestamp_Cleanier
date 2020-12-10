@@ -33,7 +33,7 @@ Both formats where basied for MKVToolNix
 
 # Code Examples:
   f1 = CC(input_file=f, chapter_file_type="txt")
-  # f1 = CC(input_file=f, chapter_file_type="xml", language="eng")
+  #f1 = CC(input_file=f, chapter_file_type="xml", language="eng")
   f1.Create_output_files(output_file=os.getcwd())
   
   
