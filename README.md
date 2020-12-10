@@ -3,7 +3,7 @@ Timestamp_Chapter_Cleaner_Creator
 
 Inputs a Raw Chapter Timestamps for a seasion txt file and outputs the chapter files as a TXT or XML Chapter File.
 
-#Examples:
+# Examples:
 Input
   raw_input_chapter.txt
     ep1
@@ -16,7 +16,7 @@ Input
     20:10
     30:15
     
-Output
+# Output
   raw_input_chapter_FIXED Folder
     # Sources/TXT_OUTPUT.txt
     EP_1(.txt or .xml) chapter file type
@@ -31,7 +31,7 @@ Both formats where basied for MKVToolNix
   XML Format
     https://github.com/DaringT/Chapter_Timestamp_Cleanier/blob/main/Sources/XML_OUTPUT.xml
 
-#Code Examples:
+# Code Examples:
   f1 = CC(input_file=f, chapter_file_type="txt")
   # f1 = CC(input_file=f, chapter_file_type="xml", language="eng")
   f1.Create_output_files(output_file=os.getcwd())
