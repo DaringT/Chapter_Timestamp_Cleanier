@@ -262,9 +262,9 @@ Parameters:
         output_folderpath = os.path.join(output_file, output_folder_name)
 
         if os.path.exists(output_folderpath):
-            print('WARNING!: this output folder: ',
+    		print('WARNING!: this output folder: ',
                   output_folderpath, 'already Exist\n')
-		raise FileExistsError
+			raise FileExistsError
 	else:
 		os.mkdir(output_folderpath)
 
