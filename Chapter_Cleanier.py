@@ -86,7 +86,7 @@ Parameters:
 
         EP_State = gr_three = gr_six = gr_four = None
 
-        ep_regex = r'((ep|Ep|EP)(\d\d?))?(^\d\d?$)?([D|d]\w[\s|:](\d\d?))?'
+        ep_regex = r"((ep|Ep|EP)(\d\d?))?(^\d\d?$)?([D|d]\d[\s|:](\d\d?))?"
         ep_prog = re.compile(ep_regex)
         ep_result = ep_prog.match(Input_Episode)
         try:
