@@ -19,7 +19,7 @@ d123
 00:11:40.000
 
 -- Regex for Episodes --
-((ep|Ep|EP)(\d\d?))?(^\d\d?$)?([D|d]\w[\s|:](\d\d?))?
+((ep|Ep|EP)(\d\d?))?(^\d\d?$)?([D|d]\d[\s|:](\d\d?))?
 
 -- cleaned Episode --
 Ep_22
